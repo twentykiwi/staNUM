@@ -28,7 +28,7 @@ public class SimpleButtons {
         return bounds.contains(screenX, screenY);
     }
 
-    public boolean isTouchDown(int screenX, int screenY) {
+    public boolean isTouchDown(float screenX, float screenY) {
 
         if (bounds.contains(screenX, screenY)) {
             isPressed = true;
@@ -38,7 +38,7 @@ public class SimpleButtons {
         return false;
     }
 
-    public boolean isTouchUp(int screenX, int screenY) {
+    public boolean isTouchUp(float screenX, float screenY) {
 
         // It only counts as a touchUp if the button is in a pressed state.
         if (bounds.contains(screenX, screenY) && isPressed) {
@@ -49,5 +49,21 @@ public class SimpleButtons {
         // Whenever a finger is released, we will cancel any presses.
         isPressed = false;
         return false;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
     }
 }

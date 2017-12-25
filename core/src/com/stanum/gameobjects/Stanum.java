@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.stanum.controls.StanumControls;
+import com.stanum.helper.AssetLoader;
 
 /**
  * Created by varunrana on 14/12/17.
@@ -18,13 +19,9 @@ public class Stanum {
     private int width;
     private int height;
     private boolean jumped = false;
-    private boolean jumpCompleted = true;
     private boolean isMovingRight = false;
     private boolean isMovingLeft = false;
     private boolean isAlive = true;
-
-    private float inputX = (Gdx.graphics.getWidth() / 204.0f);
-    private float inputY = (Gdx.graphics.getHeight() / 136.0f);
 
     private StanumControls jumpControl;
     private Rectangle boundingRectBottom;
@@ -34,13 +31,9 @@ public class Stanum {
         this.width = width;
         this.height = height;
         position = new Vector2(x, y);
-        velocity = new Vector2(0, 3);
+        velocity = new Vector2(0, 1.5f);
         acceleration = new Vector2(0, 460);
         jumpControl = new StanumControls(181,50,22,26);
-       // control = new StanumControls(4,54,16,18);
-        //left_control = new StanumControls(5,113,22,22);
-       // right_control = new StanumControls(36,113,22,22);
-       // jump_control = new StanumControls(176,113,22,22);
         boundingRectBottom = new Rectangle();
         boundingRectUpper = new Rectangle();
 
@@ -59,8 +52,6 @@ public class Stanum {
 
             //Moves character
 
-            // velocity.add(acceleration.cpy().scl(delta));
-            // position.add(velocity.cpy().scl(delta));
 
             // if (velocity.y > 200) {
             //   velocity.y = 200;
@@ -73,11 +64,9 @@ public class Stanum {
             // Handles Jumping
             if (jumped == true) {
                 velocity.y += 1;
-                jumpCompleted = false;
 
                 if (position.y + velocity.y >= 113) {
                     jumped = false;
-                    jumpCompleted = true;
                 }
 
             }
@@ -85,7 +74,7 @@ public class Stanum {
         }
     }
 
-    public void movement(int speedX){
+    public void movement(float speedX){
         velocity.x = speedX;
         position.x += velocity.x;
     }
@@ -96,17 +85,16 @@ public class Stanum {
     }
 
     public void jump(){
-        if(jumpCompleted) {
             velocity.y = -7;
+            AssetLoader.jump.play();
             jumped = true;
-        }
     }
 
     public void onRestart(int x, int y){
         position.x = x;
         position.y = y;
         velocity.x = 0;
-        velocity.y = 3;
+        velocity.y = 1.5f;
         isAlive = true;
         isMovingRight = false;
         isMovingLeft = false;
@@ -126,8 +114,6 @@ public class Stanum {
         return position.y;
     }
 
-    public void setVelocityY(int velocityY ){ velocity.y = velocityY; }
-
     public void setY(float y){ position.y = y; }
 
     public float getWidth() {
@@ -137,8 +123,6 @@ public class Stanum {
     public float getHeight() {
         return height;
     }
-
-    public void setJumped(boolean jumped){ this.jumped = jumped; }
 
     public boolean isAlive(){ return isAlive; }
 

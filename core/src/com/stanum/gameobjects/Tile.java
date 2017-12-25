@@ -31,10 +31,11 @@ public class Tile extends Scrollable{
 
     @Override
     public void reset(float newX) {
+        //width = r.nextInt(90) + 15;
         // Call the reset method in the superclass (Scrollable)
         super.reset(newX);
         // Change the height to a random number
-        height = r.nextInt(90) + 15;
+        //width = r.nextInt(90) + 15;
     }
 
     public boolean collides(Stanum stanum){

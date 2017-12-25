@@ -2,6 +2,7 @@ package com.stanum.gameobjects;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
 
@@ -14,7 +15,6 @@ public class Ball{
     private float y;
     private float velocityX;
     private float velocityY;
-    private float accelerationX;
     private float accelerationY;
     private boolean swap;
     private int width;
@@ -22,17 +22,19 @@ public class Ball{
     private Circle boundingCircle;
 
     public Ball(float x, float y, int width, int height, boolean swap){
+
         this.swap = swap;
         this.x = x;
         this.y = y;
         velocityY = 0.0f;
-        velocityX = 0.5f;
+        velocityX = 0.7f;
         accelerationY = 0.2f;
         this.width = width;
         this.height = height;
         boundingCircle = new Circle();
     }
     public void update(){
+
         boundingCircle.set(x+7,y+8,5);
 
         velocityY += accelerationY;
@@ -56,20 +58,13 @@ public class Ball{
         this.x = x;
         this.y = y;
         velocityY = 0;
-        this.velocityX = 0.5f;
+        this.velocityX = 0.7f;
         accelerationY = 0.2f;
         this.swap = swap;
     }
 
     public  boolean collides(Stanum stanum){
         if(Intersector.overlaps(boundingCircle, stanum.getBoundingRectUpper())){
-            return true;
-        }
-        return false;
-    }
-
-    public  boolean collision(Ball ball){
-        if(Intersector.overlaps(boundingCircle,ball.boundingCircle)){
             return true;
         }
         return false;
